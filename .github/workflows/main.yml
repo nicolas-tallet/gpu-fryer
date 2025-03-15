@@ -7,11 +7,6 @@ jobs:
     name: 'Base'
     runs-on: ubuntu-24.04-arm
     steps:
-      - name: 'Check Out Repository'
-        uses: 'actions/checkout@v4'
-        with:
-          ref: 'platform/fzj/jedi'
-          repository: 'AG-BDS-HPC-DELIVERY/JUBE-Benchmarking-Environment'
       - name: 'Install Docker CE'
         run: |
           sudo apt-get update
@@ -26,6 +21,11 @@ jobs:
         run: |
           pwd
           ls -al
+      - name: 'Check Out Repository'
+        uses: 'actions/checkout@v4'
+        with:
+          ref: 'main'
+          repository: 'huggingface/gpu-fryer'
       - name: 'Upload Artifact'
         uses: 'actions/upload-artifact@v4'
         with:
