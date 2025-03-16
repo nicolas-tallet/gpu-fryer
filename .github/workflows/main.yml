@@ -10,8 +10,8 @@ jobs:
       - name: 'Prolog'
         run: |
           sudo apt-get update
-          sudo apt-get search docker-ce
-          sudo apt-get search singularity
+          apt-cache search docker-ce
+          apt-cache search singularity
       - name: 'Install Docker CE'
         run: |
           sudo apt install apt-transport-https ca-certificates curl software-properties-common
