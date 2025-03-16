@@ -7,9 +7,13 @@ jobs:
     name: 'Base'
     runs-on: ubuntu-24.04-arm
     steps:
-      - name: 'Install Docker CE'
+      - name: 'Prolog'
         run: |
           sudo apt-get update
+          sudo apt-get search docker-ce
+          sudo apt-get search singularity
+      - name: 'Install Docker CE'
+        run: |
           sudo apt install apt-transport-https ca-certificates curl software-properties-common
           curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
           sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
