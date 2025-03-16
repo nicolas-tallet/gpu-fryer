@@ -9,17 +9,16 @@ jobs:
     steps:
       - name: 'Prolog'
         run: |
-          sudo apt-get update
-          apt-cache search docker-ce
+          apt-cache search apptainer
           apt-cache search singularity
       - name: 'Install Docker CE'
         run: |
-          sudo apt install apt-transport-https ca-certificates curl software-properties-common
-          curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-          sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
           sudo apt update
-          apt-cache policy docker-ce
-          sudo apt install docker-ce
+          #sudo apt install apt-transport-https ca-certificates curl software-properties-common
+          #curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+          #sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+          #apt-cache policy docker-ce
+          sudo apt install docker-ce docker-cli
           sudo docker run hello-world
       - name: 'Check Out Repository'
         uses: 'actions/checkout@v4'
