@@ -27,12 +27,12 @@ jobs:
           repository: 'huggingface/gpu-fryer'
       - name: 'Create Docker Image'
         run: |
-          ls -al
+          ls -ahl Dockerfile
           docker build -t gpu-fryer .
           docker image ls
       - name: 'Create Singularity Image'
         run: |
-          singularity build gpu-fryer.sif docker://gpu-fryer
+          singularity pull --name gpu-fryer.sif docker://gpu-fryer:latest
           ls -ahl gpu-fryer.sif
       - name: 'Upload Singularity Image File'
         uses: 'actions/upload-artifact@v4'
