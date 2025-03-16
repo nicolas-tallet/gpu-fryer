@@ -25,14 +25,18 @@ jobs:
         with:
           ref: 'main'
           repository: 'huggingface/gpu-fryer'
-      - name: 'Create Docker Image'
+      - name: 'Build Docker Image'
         run: |
-          ls -ahl Dockerfile
           docker build -t gpu-fryer .
           docker image ls
+      - name: 'Save Docker Image to TAR File'
+        run: |
+          docker save -o gpu-fryer.tar gpu-fryer
+          ls -ahl gpu-fryer.tar
       - name: 'Create Singularity Image'
         run: |
-          singularity pull --name gpu-fryer.img docker://localhost:5000/gpu-fryer:latest
+          #singularity pull --name gpu-fryer.img docker://localhost:5000/gpu-fryer:latest
+          singularity build gpu-fryer.img docker-archive://gpu-fryer.tar
           ls -ahl gpu-fryer.img
       - name: 'Upload Singularity Image File'
         uses: 'actions/upload-artifact@v4'
