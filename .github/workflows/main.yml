@@ -16,6 +16,7 @@ jobs:
           #apt-cache policy docker-ce
           sudo apt install docker-ce
           sudo docker run hello-world
+          sudo netstat -antl | grep -i 5000
       - name: 'Install Singularity'
         run: |
           sudo apt-get update
@@ -32,7 +33,7 @@ jobs:
           docker image ls
       - name: 'Create Singularity Image'
         run: |
-          singularity pull --name gpu-fryer.sif docker://gpu-fryer:latest
+          singularity pull --name gpu-fryer.sif docker://localhost:5000/gpu-fryer:latest
           ls -ahl gpu-fryer.sif
       - name: 'Upload Singularity Image File'
         uses: 'actions/upload-artifact@v4'
