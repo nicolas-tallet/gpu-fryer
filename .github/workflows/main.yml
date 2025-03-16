@@ -29,8 +29,13 @@ jobs:
         run: |
           ls -al
           docker build -t gpu-fryer .
-      - name: 'Upload Artifact'
+          docker image ls
+      - name: 'Create Singularity Image'
+        run: |
+          singularity build gpu-fryer.sif docker://gpu-fryer
+          ls -ahl gpu-fryer.sif
+      - name: 'Upload Singularity Image File'
         uses: 'actions/upload-artifact@v4'
         with:
-          name: 'wiki-files'
-          path: '**/*.pdf'
+          name: 'singularity-image-file'
+          path: 'gpu-fryer.sif'
